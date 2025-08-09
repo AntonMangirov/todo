@@ -1,18 +1,20 @@
+import React from "react";
 import Add from "@mui/icons-material/Add";
 import { TextField, Paper, Button } from "@mui/material";
-import React from "react";
+
+const DEFAULT_TODO = { name: "", discription: "" };
 
 export const Panel = () => {
-  const [inputValue, setInputValue] = React.useState("");
+  const [todo, setTodo] = React.useState(DEFAULT_TODO);
 
   const onClick = () => {
-    console.log("@", inputValue);
-    setInputValue("");
+    console.log("@", todo);
+    setTodo(DEFAULT_TODO);
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setInputValue(value);
+    const { value, name } = e.target;
+    setTodo({ ...todo, [name]: value });
   };
   return (
     <Paper
@@ -22,16 +24,22 @@ export const Panel = () => {
         padding: "25px 30px",
         borderRadius: 2,
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "space-between",
         alignContent: "center",
         gap: 2,
       }}
     >
       <TextField
-        value={inputValue}
+        value={todo.name}
         onChange={onChange}
-        label="todo discription"
-        sx={{ width: "300px" }}
+        name="name"
+        label="name"
+      />
+      <TextField
+        value={todo.discription}
+        onChange={onChange}
+        name="discription"
+        label="discription"
       />
 
       <Button startIcon={<Add />} variant="outlined" onClick={onClick}>

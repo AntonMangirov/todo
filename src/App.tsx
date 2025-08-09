@@ -4,7 +4,7 @@ import "./App.css";
 
 export const App = () => (
   <div className="App">
-    <Box display="flex" flexDirection="column" width="400px">
+    <Box display="flex" flexDirection="column" width="500px">
       <Header />
       <Panel />
       <TodoList />
