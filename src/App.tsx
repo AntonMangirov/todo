@@ -11,9 +11,26 @@ export type Todo = {
 };
 
 export const App = () => {
+  const [editTodoId, setEditTodoId] = React.useState<number | null>(null);
   const [todoList, setTodoList] = React.useState<Todo[]>([
     { id: 1, name: "task1", discription: "test", checked: false },
   ]);
+
+  const onEdit = (id: Todo["id"]) => {
+    setEditTodoId(id);
+  };
+
+  const onSaveEdit = (
+    id: number,
+    updatedTodo: Omit<Todo, "id" | "checked">
+  ) => {
+    setTodoList(
+      todoList.map((todo) =>
+        todo.id === id ? { ...todo, ...updatedTodo } : todo
+      )
+    );
+    setEditTodoId(null);
+  };
 
   const onDeleteTodo = (id: Todo["id"]) => {
     setTodoList(todoList.filter((todo) => todo.id !== id));
@@ -21,16 +38,11 @@ export const App = () => {
 
   const onAddTodo = ({ name, discription }: Omit<Todo, "id" | "checked">) => {
     const newId =
-      todoList.length > 0 ? todoList[todoList.length - 1].id + 1 : 1;
-
-    const newTodo: Todo = {
-      id: newId,
-      name,
-      discription,
-      checked: false,
-    };
-
-    setTodoList([...todoList, newTodo]);
+      todoList.length > 0 ? Math.max(...todoList.map((t) => t.id)) + 1 : 1;
+    setTodoList([
+      ...todoList,
+      { id: newId, name, discription, checked: false },
+    ]);
   };
 
   const onCheckTodo = (id: Todo["id"]) => {
@@ -47,9 +59,12 @@ export const App = () => {
         <Header />
         <Panel onAddTodo={onAddTodo} />
         <TodoList
+          editTodoId={editTodoId}
           todoList={todoList}
           onDeleteTodo={onDeleteTodo}
           onCheckTodo={onCheckTodo}
+          onEdit={onEdit}
+          onChangeTodo={onSaveEdit}
         />
       </Box>
     </div>
