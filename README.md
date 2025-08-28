@@ -1,12 +1,73 @@
-# React + Vite
+# Todo (React + Vite + TypeScript + MUI)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Небольшое приложение-шаблон для списка задач на базе Vite, React и TypeScript с использованием Material UI.
 
-Currently, two official plugins are available:
+## Возможности
+- Быстрый старт разработки с HMR (Vite)
+- Готовая интеграция **MUI** и **Emotion** для стилизации
+- Строгая типизация на **TypeScript**
+- Базовая настройка **ESLint**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Технологии
+- **React 19** + **TypeScript**
+- **Vite 7**
+- **MUI (Material UI) 7** + **@emotion/react** и **@emotion/styled**
+- **ESLint 9** (react hooks, react-refresh)
 
-## Expanding the ESLint configuration
+## Требования
+- Node.js ≥ 18 (рекомендовано LTS 18/20)
+- npm ≥ 9
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Проверьте версии:
+```bash
+node -v
+npm -v
+```
+
+## Установка и запуск
+```bash
+# Перейти в директорию проекта
+cd todo
+
+# Установить зависимости
+npm install
+
+# Запустить dev-сервер (HMR)
+npm run dev
+# По умолчанию: http://localhost:5173
+```
+
+## Скрипты
+```bash
+npm run dev      # запуск dev-сервера (Vite)
+npm run build    # production сборка (Vite)
+npm run preview  # предпросмотр собранного билда
+npm run lint     # запуск ESLint
+```
+
+## Структура проекта
+```text
+todo/
+  public/
+  src/
+    components/
+    App.tsx
+    main.tsx
+    index.css
+  package.json
+  vite.config.js
+  README.md
+```
+
+## Заметки
+- Vite использует ESM и современную конфигурацию. Для SSR/деплоя см. документацию Vite.
+- Если порт 5173 занят, Vite предложит альтернативный порт.
+- Для корректной работы MUI используйте тему и стили из `@mui/material` и `@emotion/*`.
+
+## Частые проблемы
+- Конфликты версий Node/npm: используйте LTS и при необходимости `nvm`.
+- Ошибки при установке пакетов: `npm cache verify` и повторите `npm install`.
+- Проблемы с импортами типов: убедитесь, что `vite-env.d.ts` присутствует и `tsconfig` корректен.
+
+## Лицензия
+MIT (если не указано иное).
